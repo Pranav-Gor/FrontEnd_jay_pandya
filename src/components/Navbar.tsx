@@ -41,7 +41,7 @@ const Navbar = () => {
       <div className="max-w-6xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           <div className="font-bold text-xl gradient-text">
-            TravelDesk
+            Jay Panday
           </div>
           
           <div className="flex space-x-8">
