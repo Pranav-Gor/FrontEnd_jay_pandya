@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { FileText, Plane, ArrowRight, Star } from 'lucide-react';
+import { FileText, Plane, ArrowRight, Clock, Shield, Award } from 'lucide-react';
 
 interface ServiceCardProps {
   type: 'passport' | 'flight';
@@ -19,21 +19,27 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ type }) => {
     },
     flight: {
       icon: <Plane size={48} />,
-      title: 'Book Your Flight',
+      title: 'Flight Booking',
       gradient: 'from-magenta-600 to-cyan-600'
     }
   };
 
-  const testimonials = {
+  const backContent = {
     passport: {
-      name: 'Sarah Johnson',
-      text: 'Jay helped me renew my passport so quickly! The process was seamless and stress-free.',
-      rating: 5
+      features: [
+        { icon: <Clock size={20} />, text: 'Fast Processing' },
+        { icon: <Shield size={20} />, text: 'Secure Application' },
+        { icon: <Award size={20} />, text: 'Expert Assistance' }
+      ],
+      description: 'Complete passport application and renewal services with professional guidance.'
     },
     flight: {
-      name: 'Michael Chen',
-      text: 'Found the best flight deals through Jay. Saved me $300 on my international trip!',
-      rating: 5
+      features: [
+        { icon: <Clock size={20} />, text: 'Best Prices' },
+        { icon: <Shield size={20} />, text: 'Safe Booking' },
+        { icon: <Award size={20} />, text: '24/7 Support' }
+      ],
+      description: 'Find and book the perfect flights with our expert travel assistance.'
     }
   };
 
@@ -61,29 +67,30 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ type }) => {
           </div>
         </div>
 
-        {/* Back Side - Testimonials */}
+        {/* Back Side - Features */}
         <div className={`absolute inset-0 w-full h-full backface-hidden rotate-y-180 rounded-xl glass-morphism border border-white/20 bg-gradient-to-br ${frontContent[type].gradient}/30 neon-glow`}>
           <div className="flex flex-col items-center justify-center h-full p-8 text-center">
-            <h3 className="text-xl font-bold text-white mb-4">
-              What Our Clients Say
+            <h3 className="text-xl font-bold text-white mb-6">
+              Why Choose Us?
             </h3>
             
-            <div className="flex mb-3">
-              {[...Array(testimonials[type].rating)].map((_, i) => (
-                <Star key={i} size={16} className="text-yellow-400 fill-current" />
+            <div className="space-y-4 mb-6">
+              {backContent[type].features.map((feature, index) => (
+                <div key={index} className="flex items-center space-x-3 text-gray-300">
+                  <div className={`text-${isPassport ? 'purple' : 'magenta'}-400`}>
+                    {feature.icon}
+                  </div>
+                  <span className="text-sm">{feature.text}</span>
+                </div>
               ))}
             </div>
             
-            <p className="text-gray-300 text-sm mb-4 italic">
-              "{testimonials[type].text}"
-            </p>
-            
-            <p className="text-white text-sm font-semibold mb-6">
-              - {testimonials[type].name}
+            <p className="text-gray-300 text-sm mb-6 text-center">
+              {backContent[type].description}
             </p>
             
             <button className={`flex items-center space-x-2 px-6 py-3 bg-gradient-to-r ${frontContent[type].gradient} rounded-full text-white font-semibold hover:scale-105 transition-transform duration-300`}>
-              <span>Start Now</span>
+              <span>Get Started</span>
               <ArrowRight size={16} />
             </button>
           </div>

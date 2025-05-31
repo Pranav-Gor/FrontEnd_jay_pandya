@@ -20,16 +20,6 @@ const HeroSection = () => {
   return (
     <section id="home" className="min-h-screen flex items-center justify-center px-6 pt-20">
       <div className="max-w-6xl mx-auto text-center">
-        {/* Company Name & Logo */}
-        <div className="mb-8">
-          <h1 className="text-6xl md:text-7xl font-bold gradient-text mb-4">
-            Jay Panday
-          </h1>
-          <p className="text-gray-400 text-lg">
-            Your Personal Travel Assistant
-          </p>
-        </div>
-
         {/* Main Heading */}
         <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
           Travel Made
