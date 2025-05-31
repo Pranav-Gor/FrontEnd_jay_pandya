@@ -90,142 +90,154 @@ const ContactSection = () => {
 
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Enhanced Contact Form */}
-          <div className="glass-morphism rounded-2xl p-8 border border-purple-500/20">
-            <div className="mb-8">
-              <h3 className="text-2xl font-bold text-white mb-4">Send us a Message</h3>
-              <p className="text-gray-300">Fill out the form below and we'll get back to you within 24 hours.</p>
-            </div>
-
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="relative">
-                  <label className="block text-sm font-medium text-gray-300 mb-2">
-                    Full Name *
-                  </label>
-                  <div className="relative">
-                    <User size={18} className="absolute left-3 top-3 text-gray-400" />
-                    <input
-                      type="text"
-                      name="name"
-                      required
-                      value={formData.name}
-                      onChange={handleChange}
-                      className="w-full pl-10 pr-4 py-3 bg-gray-900/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
-                      placeholder="John Doe"
-                    />
-                  </div>
+          <div className="glass-morphism rounded-3xl p-10 border border-purple-500/30 bg-gradient-to-br from-purple-600/10 to-magenta-600/10 relative overflow-hidden">
+            {/* Background decoration */}
+            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-purple-500/20 to-transparent rounded-full blur-xl"></div>
+            <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-magenta-500/20 to-transparent rounded-full blur-xl"></div>
+            
+            <div className="relative z-10">
+              <div className="mb-8 text-center">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-purple-600 to-magenta-600 rounded-2xl mb-4">
+                  <Mail size={28} className="text-white" />
                 </div>
-
-                <div className="relative">
-                  <label className="block text-sm font-medium text-gray-300 mb-2">
-                    Email Address *
-                  </label>
-                  <div className="relative">
-                    <Mail size={18} className="absolute left-3 top-3 text-gray-400" />
-                    <input
-                      type="email"
-                      name="email"
-                      required
-                      value={formData.email}
-                      onChange={handleChange}
-                      className="w-full pl-10 pr-4 py-3 bg-gray-900/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
-                      placeholder="john@example.com"
-                    />
-                  </div>
-                </div>
+                <h3 className="text-3xl font-bold text-white mb-4">Send us a Message</h3>
+                <p className="text-gray-300">Fill out the form below and we'll get back to you within 24 hours.</p>
               </div>
 
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="relative">
-                  <label className="block text-sm font-medium text-gray-300 mb-2">
-                    Phone Number
-                  </label>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="relative group">
+                    <label className="block text-sm font-medium text-gray-300 mb-2">
+                      Full Name *
+                    </label>
+                    <div className="relative">
+                      <User size={18} className="absolute left-4 top-4 text-gray-400 group-focus-within:text-purple-400 transition-colors" />
+                      <input
+                        type="text"
+                        name="name"
+                        required
+                        value={formData.name}
+                        onChange={handleChange}
+                        className="w-full pl-12 pr-4 py-4 bg-gray-900/60 border border-gray-600/50 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 backdrop-blur-sm"
+                        placeholder="John Doe"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="relative group">
+                    <label className="block text-sm font-medium text-gray-300 mb-2">
+                      Email Address *
+                    </label>
+                    <div className="relative">
+                      <Mail size={18} className="absolute left-4 top-4 text-gray-400 group-focus-within:text-purple-400 transition-colors" />
+                      <input
+                        type="email"
+                        name="email"
+                        required
+                        value={formData.email}
+                        onChange={handleChange}
+                        className="w-full pl-12 pr-4 py-4 bg-gray-900/60 border border-gray-600/50 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 backdrop-blur-sm"
+                        placeholder="john@example.com"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="relative group">
+                    <label className="block text-sm font-medium text-gray-300 mb-2">
+                      Phone Number
+                    </label>
+                    <div className="relative">
+                      <Phone size={18} className="absolute left-4 top-4 text-gray-400 group-focus-within:text-purple-400 transition-colors" />
+                      <input
+                        type="tel"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        className="w-full pl-12 pr-4 py-4 bg-gray-900/60 border border-gray-600/50 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 backdrop-blur-sm"
+                        placeholder="+1 (555) 123-4567"
+                      />
+                    </div>
+                  </div>
+
                   <div className="relative">
-                    <Phone size={18} className="absolute left-3 top-3 text-gray-400" />
-                    <input
-                      type="tel"
-                      name="phone"
-                      value={formData.phone}
+                    <label className="block text-sm font-medium text-gray-300 mb-2">
+                      Service Needed *
+                    </label>
+                    <select
+                      name="service"
+                      required
+                      value={formData.service}
                       onChange={handleChange}
-                      className="w-full pl-10 pr-4 py-3 bg-gray-900/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
-                      placeholder="+1 (555) 123-4567"
-                    />
+                      className="w-full px-4 py-4 bg-gray-900/60 border border-gray-600/50 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 backdrop-blur-sm"
+                    >
+                      <option value="">Select a service</option>
+                      <option value="passport">Passport Services</option>
+                      <option value="flight">Flight Booking</option>
+                      <option value="consultation">Travel Consultation</option>
+                      <option value="other">Other</option>
+                    </select>
                   </div>
                 </div>
 
                 <div className="relative">
                   <label className="block text-sm font-medium text-gray-300 mb-2">
-                    Service Needed *
+                    Passport Number (Optional)
                   </label>
-                  <select
-                    name="service"
-                    required
-                    value={formData.service}
+                  <input
+                    type="text"
+                    name="passportNumber"
+                    value={formData.passportNumber}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-gray-900/50 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
-                  >
-                    <option value="">Select a service</option>
-                    <option value="passport">Passport Services</option>
-                    <option value="flight">Flight Booking</option>
-                    <option value="consultation">Travel Consultation</option>
-                    <option value="other">Other</option>
-                  </select>
+                    className="w-full px-4 py-4 bg-gray-900/60 border border-gray-600/50 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 backdrop-blur-sm"
+                    placeholder="123456789"
+                  />
                 </div>
-              </div>
 
-              <div className="relative">
-                <label className="block text-sm font-medium text-gray-300 mb-2">
-                  Passport Number (Optional)
-                </label>
-                <input
-                  type="text"
-                  name="passportNumber"
-                  value={formData.passportNumber}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 bg-gray-900/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
-                  placeholder="123456789"
-                />
-              </div>
+                <div className="relative">
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
+                    How can we help you? *
+                  </label>
+                  <textarea
+                    name="message"
+                    rows={4}
+                    required
+                    value={formData.message}
+                    onChange={handleChange}
+                    className="w-full px-4 py-4 bg-gray-900/60 border border-gray-600/50 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 resize-none backdrop-blur-sm"
+                    placeholder="Tell us about your travel plans, passport needs, or any questions you have..."
+                  />
+                </div>
 
-              <div className="relative">
-                <label className="block text-sm font-medium text-gray-300 mb-2">
-                  How can we help you? *
-                </label>
-                <textarea
-                  name="message"
-                  rows={4}
-                  required
-                  value={formData.message}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 bg-gray-900/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 resize-none"
-                  placeholder="Tell us about your travel plans, passport needs, or any questions you have..."
-                />
-              </div>
-
-              <button
-                type="submit"
-                disabled={isSubmitted}
-                className={`w-full py-4 rounded-lg font-semibold text-white transition-all duration-300 ${
-                  isSubmitted
-                    ? 'bg-green-600 cursor-not-allowed'
-                    : 'bg-gradient-to-r from-purple-600 to-magenta-600 hover:from-magenta-600 hover:to-purple-600 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/50'
-                }`}
-              >
-                <div className="flex items-center justify-center space-x-2">
-                  {isSubmitted ? (
-                    <>
-                      <CheckCircle size={20} />
-                      <span>Message Sent Successfully!</span>
-                    </>
-                  ) : (
-                    <>
-                      <Send size={20} />
-                      <span>Send Message</span>
-                    </>
+                <button
+                  type="submit"
+                  disabled={isSubmitted}
+                  className={`w-full py-5 rounded-xl font-semibold text-white transition-all duration-300 relative overflow-hidden ${
+                    isSubmitted
+                      ? 'bg-green-600 cursor-not-allowed'
+                      : 'bg-gradient-to-r from-purple-600 to-magenta-600 hover:from-magenta-600 hover:to-purple-600 hover:scale-[1.02] hover:shadow-2xl hover:shadow-purple-500/50'
+                  }`}
+                >
+                  <div className="flex items-center justify-center space-x-2 relative z-10">
+                    {isSubmitted ? (
+                      <>
+                        <CheckCircle size={20} />
+                        <span>Message Sent Successfully!</span>
+                      </>
+                    ) : (
+                      <>
+                        <Send size={20} />
+                        <span>Send Message</span>
+                      </>
+                    )}
+                  </div>
+                  {!isSubmitted && (
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent transform -skew-x-12 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
                   )}
-                </div>
-              </button>
-            </form>
+                </button>
+              </form>
+            </div>
           </div>
 
           {/* Services & FAQ Section */}
@@ -266,15 +278,6 @@ const ContactSection = () => {
                   <p className="text-gray-300 text-sm">Requirements vary by service. We'll provide a complete checklist after consultation.</p>
                 </div>
               </div>
-            </div>
-
-            {/* Emergency Contact */}
-            <div className="glass-morphism rounded-2xl p-8 border border-red-500/20 bg-gradient-to-r from-red-600/10 to-orange-600/10">
-              <h3 className="text-2xl font-bold text-white mb-4">Emergency Assistance</h3>
-              <p className="text-gray-300 mb-4">Need urgent help with travel documents? Our emergency hotline is available 24/7.</p>
-              <button className="bg-gradient-to-r from-red-600 to-orange-600 text-white px-6 py-3 rounded-lg font-semibold hover:scale-105 transition-all duration-300">
-                Call Emergency Line
-              </button>
             </div>
           </div>
         </div>

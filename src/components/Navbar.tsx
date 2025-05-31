@@ -40,8 +40,13 @@ const Navbar = () => {
     <nav className="fixed top-0 left-0 right-0 z-50 glass-morphism border-b border-purple-500/20">
       <div className="max-w-6xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          <div className="font-bold text-xl gradient-text">
-            Jay Panday
+          <div className="flex items-center space-x-3">
+            <div className="w-10 h-10 bg-gradient-to-r from-purple-600 to-magenta-600 rounded-lg flex items-center justify-center">
+              <Plane size={24} className="text-white" />
+            </div>
+            <div className="font-bold text-xl gradient-text">
+              Jay Panday
+            </div>
           </div>
           
           <div className="flex space-x-6">
