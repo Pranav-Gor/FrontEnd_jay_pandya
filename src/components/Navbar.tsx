@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Plane, FileText, Mail } from 'lucide-react';
+import { Plane, FileText, Mail, Users } from 'lucide-react';
 
 const Navbar = () => {
   const [activeSection, setActiveSection] = useState('home');
@@ -15,7 +15,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['home', 'services', 'contact'];
+      const sections = ['home', 'services', 'testimonials', 'contact'];
       const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {
@@ -44,7 +44,7 @@ const Navbar = () => {
             Jay Panday
           </div>
           
-          <div className="flex space-x-8">
+          <div className="flex space-x-6">
             <button
               onClick={() => scrollToSection('services')}
               className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-300 ${
@@ -54,19 +54,19 @@ const Navbar = () => {
               }`}
             >
               <FileText size={18} />
-              <span>Passport Services</span>
+              <span>Services</span>
             </button>
             
             <button
-              onClick={() => scrollToSection('services')}
+              onClick={() => scrollToSection('testimonials')}
               className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-300 ${
-                activeSection === 'services'
+                activeSection === 'testimonials'
                   ? 'bg-purple-600/30 text-purple-300 neon-glow'
                   : 'text-gray-300 hover:text-purple-400'
               }`}
             >
-              <Plane size={18} />
-              <span>Book Flight</span>
+              <Users size={18} />
+              <span>Testimonials</span>
             </button>
             
             <button
@@ -78,7 +78,7 @@ const Navbar = () => {
               }`}
             >
               <Mail size={18} />
-              <span>Contact Us</span>
+              <span>Contact</span>
             </button>
           </div>
         </div>

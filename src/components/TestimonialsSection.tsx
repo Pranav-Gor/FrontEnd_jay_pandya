@@ -9,21 +9,24 @@ const TestimonialsSection = () => {
       service: 'Passport Renewal',
       text: 'Amazing service! They helped me renew my passport so quickly. The process was seamless and stress-free. Highly recommended!',
       rating: 5,
-      location: 'New York, USA'
+      location: 'New York, USA',
+      image: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face'
     },
     {
       name: 'Michael Chen',
       service: 'Flight Booking',
       text: 'Found the best flight deals through their service. Saved me $300 on my international trip! Excellent customer support.',
       rating: 5,
-      location: 'California, USA'
+      location: 'California, USA',
+      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face'
     },
     {
       name: 'Emily Rodriguez',
       service: 'Passport Application',
       text: 'First-time passport application made easy. They guided me through every step and answered all my questions patiently.',
       rating: 5,
-      location: 'Texas, USA'
+      location: 'Texas, USA',
+      image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face'
     }
   ];
 
@@ -35,7 +38,7 @@ const TestimonialsSection = () => {
             What Our Clients Say
           </h2>
           <p className="text-gray-300 text-lg max-w-2xl mx-auto">
-            Hover over the cards to read detailed reviews from our satisfied customers
+            Real stories from satisfied customers who trusted us with their travel needs
           </p>
         </div>
 

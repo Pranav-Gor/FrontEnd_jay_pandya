@@ -67,9 +67,9 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ type }) => {
           </div>
         </div>
 
-        {/* Back Side - Features */}
-        <div className={`absolute inset-0 w-full h-full backface-hidden rotate-y-180 rounded-xl glass-morphism border border-white/20 bg-gradient-to-br ${frontContent[type].gradient}/30 neon-glow`}>
-          <div className="flex flex-col items-center justify-center h-full p-8 text-center">
+        {/* Back Side - Features (Fixed mirroring) */}
+        <div className={`absolute inset-0 w-full h-full backface-hidden rounded-xl glass-morphism border border-white/20 bg-gradient-to-br ${frontContent[type].gradient}/30 neon-glow`} style={{ transform: 'rotateY(180deg)' }}>
+          <div className="flex flex-col items-center justify-center h-full p-8 text-center" style={{ transform: 'rotateY(180deg)' }}>
             <h3 className="text-xl font-bold text-white mb-6">
               Why Choose Us?
             </h3>
