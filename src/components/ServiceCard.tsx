@@ -1,6 +1,6 @@
-
 import React, { useState } from 'react';
 import { FileText, Plane, ArrowRight, Clock, Shield, Award } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 interface ServiceCardProps {
   type: 'passport' | 'flight';
@@ -8,6 +8,7 @@ interface ServiceCardProps {
 
 const ServiceCard: React.FC<ServiceCardProps> = ({ type }) => {
   const [isFlipped, setIsFlipped] = useState(false);
+  const navigate = useNavigate();
 
   const isPassport = type === 'passport';
 
@@ -89,7 +90,10 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ type }) => {
               {backContent[type].description}
             </p>
             
-            <button className={`flex items-center space-x-2 px-6 py-3 bg-gradient-to-r ${frontContent[type].gradient} rounded-full text-white font-semibold hover:scale-105 transition-transform duration-300`}>
+            <button
+              className={`flex items-center space-x-2 px-6 py-3 bg-gradient-to-r ${frontContent[type].gradient} rounded-full text-white font-semibold hover:scale-105 transition-transform duration-300`}
+              onClick={() => navigate(type === 'passport' ? '/passport-services' : '/book-flight')}
+            >
               <span>Get Started</span>
               <ArrowRight size={16} />
             </button>

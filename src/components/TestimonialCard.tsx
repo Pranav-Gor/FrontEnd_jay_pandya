@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { Star, MapPin } from 'lucide-react';
+import { Star, MapPin, Quote } from 'lucide-react';
 
 interface TestimonialCardProps {
   testimonial: {
@@ -15,11 +14,22 @@ interface TestimonialCardProps {
 
 const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial }) => {
   return (
-    <div className="w-80 h-96 rounded-xl glass-morphism border border-white/20 bg-gradient-to-br from-purple-600/20 to-magenta-600/20 hover:shadow-2xl hover:shadow-purple-500/50 transition-all duration-300 p-6">
-      <div className="flex flex-col h-full">
+    <div className="w-80 h-96 rounded-xl glass-morphism border border-white/20 bg-gradient-to-br from-purple-600/20 to-magenta-600/20 hover:shadow-2xl hover:shadow-purple-500/50 transition-all duration-300 p-6 relative overflow-hidden">
+      {/* Decorative elements */}
+      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-purple-500/10 to-transparent rounded-full blur-xl"></div>
+      <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-magenta-500/10 to-transparent rounded-full blur-xl"></div>
+      
+      <div className="flex flex-col h-full relative z-10">
+        {/* Quote icon */}
+        <div className="absolute top-4 right-4 text-purple-400/30">
+          <Quote size={24} />
+        </div>
+
         {/* User Image and Info */}
         <div className="flex items-center mb-6">
-          <div className="w-16 h-16 rounded-full overflow-hidden mr-4">
+          <div className="w-16 h-16 rounded-full overflow-hidden mr-4 border-2 border-purple-500/30">
+    
+          
             <img 
               src={testimonial.image} 
               alt={testimonial.name}

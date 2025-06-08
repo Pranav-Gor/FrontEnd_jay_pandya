@@ -1,8 +1,10 @@
-
 import React from 'react';
 import { FileText, Plane, ArrowRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const HeroSection = () => {
+  const navigate = useNavigate();
+
   const scrollToServices = () => {
     const element = document.getElementById('services');
     if (element) {
@@ -34,7 +36,7 @@ const HeroSection = () => {
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
           <button 
-            onClick={scrollToContact}
+            onClick={() => navigate('/passport-services')}
             className="group flex items-center space-x-3 px-8 py-4 bg-gradient-to-r from-purple-600 to-violet-600 rounded-full text-white font-semibold hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-purple-500/50"
           >
             <FileText size={20} />
@@ -43,11 +45,11 @@ const HeroSection = () => {
           </button>
           
           <button 
-            onClick={scrollToServices}
-            className="group flex items-center space-x-3 px-8 py-4 glass-morphism border border-purple-500/30 rounded-full text-white font-semibold hover:bg-purple-600/20 transition-all duration-300"
+            onClick={() => navigate('/book-flight')}
+            className="group flex items-center space-x-3 px-8 py-4 bg-gradient-to-r from-purple-600 to-magenta-600 hover:from-magenta-600 hover:to-purple-600 rounded-full text-white font-semibold hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-purple-500/50"
           >
             <Plane size={20} />
-            <span>Book Flight</span>
+            <span>Book Your Flight</span>
             <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
           </button>
         </div>

@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { MessageCircle, FileText, Plane, X } from 'lucide-react';
 
@@ -30,7 +29,6 @@ const Chatbot = () => {
           <div className="bg-gradient-to-r from-purple-600 to-magenta-600 p-4 flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <MessageCircle size={20} className="text-white" />
-              <span className="text-white font-semibold">Travel Assistant</span>
             </div>
             <button
               onClick={() => setIsOpen(false)}

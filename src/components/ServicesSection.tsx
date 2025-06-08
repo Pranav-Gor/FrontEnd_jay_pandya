@@ -1,8 +1,9 @@
-
 import React from 'react';
 import ServiceCard from './ServiceCard';
+import { useNavigate } from 'react-router-dom';
 
 const ServicesSection = () => {
+  const navigate = useNavigate();
   return (
     <section id="services" className="py-20 px-6">
       <div className="max-w-6xl mx-auto">

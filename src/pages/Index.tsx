@@ -1,11 +1,9 @@
-
 import React from 'react';
 import Navbar from '../components/Navbar';
 import HeroSection from '../components/HeroSection';
 import ServicesSection from '../components/ServicesSection';
 import TestimonialsSection from '../components/TestimonialsSection';
 import ContactSection from '../components/ContactSection';
-import Chatbot from '../components/Chatbot';
 import Footer from '../components/Footer';
 
 const Index = () => {
@@ -17,7 +15,6 @@ const Index = () => {
       <TestimonialsSection />
       <ContactSection />
       <Footer />
-      <Chatbot />
     </div>
   );
 };

@@ -1,32 +1,31 @@
-
 import React from 'react';
 import TestimonialCard from './TestimonialCard';
 
 const TestimonialsSection = () => {
   const testimonials = [
     {
-      name: 'Sarah Johnson',
+      name: 'Priya Sharma',
       service: 'Passport Renewal',
-      text: 'Amazing service! They helped me renew my passport so quickly. The process was seamless and stress-free. Highly recommended!',
+      text: 'As an Indian citizen living abroad, I was worried about my passport renewal process. Jay made it incredibly smooth and efficient. His knowledge of both Indian and international travel requirements is impressive!',
+      rating: 5,
+      location: 'London, UK',
+      image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop&crop=face'
+    },
+    {
+      name: 'Rahul Patel',
+      service: 'Flight Booking',
+      text: 'Found amazing deals for my family trip to India. The personalized service and attention to detail made all the difference. They even helped with visa documentation!',
+      rating: 5,
+      location: 'Toronto, Canada',
+      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face'
+    },
+    {
+      name: 'Ananya Gupta',
+      service: 'Travel Consultation',
+      text: 'Being a frequent traveler between India and the US, I needed someone who understands both cultures. Jay\'s expertise in international travel made my journey hassle-free. Highly recommended!',
       rating: 5,
       location: 'New York, USA',
-      image: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face'
-    },
-    {
-      name: 'Michael Chen',
-      service: 'Flight Booking',
-      text: 'Found the best flight deals through their service. Saved me $300 on my international trip! Excellent customer support.',
-      rating: 5,
-      location: 'California, USA',
-      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face'
-    },
-    {
-      name: 'Emily Rodriguez',
-      service: 'Passport Application',
-      text: 'First-time passport application made easy. They guided me through every step and answered all my questions patiently.',
-      rating: 5,
-      location: 'Texas, USA',
-      image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face'
+      image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop&crop=face'
     }
   ];
 
