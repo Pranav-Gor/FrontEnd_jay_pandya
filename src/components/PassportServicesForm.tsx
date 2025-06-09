@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { FileText, Mail, Phone, MessageSquare } from 'lucide-react';
+import { FileText, Mail, Phone, MessageSquare, Loader2, CheckCircle } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 // Validation functions
 const validateEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 const validatePhone = (phone: string) => /^\d{10}$/.test(phone);
 
 const PassportServicesForm: React.FC = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -15,6 +17,7 @@ const PassportServicesForm: React.FC = () => {
     passportType: 'renewal',
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -44,11 +47,71 @@ const PassportServicesForm: React.FC = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (validateForm()) {
-      setIsSubmitted(true);
-      setTimeout(() => setIsSubmitted(false), 3000);
+      setIsLoading(true);
+      try {
+        const requestData = {
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          passportServiceType: formData.passportType,
+          message: formData.message
+        };
+
+        console.log('Sending passport request with data:', requestData);
+
+        const response = await fetch('https://backend-jay-pandya-0.onrender.com/api/passport', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(requestData),
+          mode: 'cors'
+        });
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error('Error response body:', errorText);
+          throw new Error(`HTTP error! status: ${response.status}, body: ${errorText}`);
+        }
+
+        const data = await response.json();
+        console.log('Success response:', data);
+
+        setIsSubmitted(true);
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          countryCode: '+91',
+          message: '',
+          passportType: 'renewal'
+        });
+
+        // Show success message for 5 seconds then redirect
+        setTimeout(() => {
+          setIsSubmitted(false);
+          navigate('/'); // Redirect to home page
+        }, 5000);
+
+      } catch (error) {
+        console.error('Passport form submission error:', error);
+        let errorMessage = 'Failed to send message. ';
+        if (error instanceof Error) {
+          errorMessage += error.message;
+        } else {
+          errorMessage += 'Please try again later.';
+        }
+        setErrors(prev => ({
+          ...prev,
+          submit: errorMessage
+        }));
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 

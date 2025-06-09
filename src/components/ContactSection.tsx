@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { Mail, Send, CheckCircle, Phone, Clock } from 'lucide-react';
+import { Mail, Send, CheckCircle, Phone, Clock, Loader2 } from 'lucide-react';
 import { validateEmail, validatePhone, validateName } from '../utils/api';
+import { useNavigate } from 'react-router-dom';
 
 const ContactSection = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -10,6 +12,7 @@ const ContactSection = () => {
     message: ''
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -41,11 +44,90 @@ const ContactSection = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (validateForm()) {
-      setIsSubmitted(true);
-      setTimeout(() => setIsSubmitted(false), 3000);
+      setIsLoading(true);
+      let retryCount = 0;
+      const maxRetries = 2;
+
+      const trySubmit = async () => {
+        try {
+          const requestData = {
+            name: formData.name,
+            email: formData.email,
+            phone: formData.phone,
+            message: formData.message
+          };
+
+          console.log('Sending request with data:', requestData);
+          console.log('Attempting to connect to:', 'https://backend-jay-pandya-0.onrender.com/api/contact');
+
+          const response = await fetch('https://backend-jay-pandya-0.onrender.com/api/contact', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify(requestData),
+            mode: 'cors'
+          });
+
+          if (!response.ok) {
+            const errorText = await response.text();
+            console.error('Error response body:', errorText);
+            throw new Error(`HTTP error! status: ${response.status}, body: ${errorText}`);
+          }
+
+          const data = await response.json();
+          console.log('Success response:', data);
+
+          setIsSubmitted(true);
+          setFormData({
+            name: '',
+            email: '',
+            phone: '',
+            message: ''
+          });
+          
+          // Show success message for 5 seconds then redirect
+          setTimeout(() => {
+            setIsSubmitted(false);
+            navigate('/'); // Redirect to home page
+          }, 5000);
+          
+          return true;
+        } catch (error) {
+          console.error('Contact form submission error:', error);
+          
+          if (retryCount < maxRetries) {
+            retryCount++;
+            console.log(`Retrying submission (${retryCount}/${maxRetries})...`);
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            return trySubmit();
+          }
+
+          let errorMessage = 'Failed to send message. ';
+          if (error instanceof Error) {
+            if (error.message.includes('Failed to fetch')) {
+              errorMessage += 'Unable to connect to the server. Please check if the server is running on port 4000.';
+            } else {
+              errorMessage += error.message;
+            }
+          } else {
+            errorMessage += 'Please try again later.';
+          }
+
+          setErrors(prev => ({
+            ...prev,
+            submit: errorMessage
+          }));
+          return false;
+        }
+      };
+
+      await trySubmit();
+      setIsLoading(false);
     }
   };
 
@@ -187,10 +269,12 @@ const ContactSection = () => {
 
               <button
                 type="submit"
-                disabled={isSubmitted}
+                disabled={isLoading || isSubmitted}
                 className={`w-full py-5 rounded-xl font-semibold text-white transition-all duration-300 relative overflow-hidden ${
                   isSubmitted
                     ? 'bg-green-600 cursor-not-allowed'
+                    : isLoading
+                    ? 'bg-purple-600/70 cursor-wait'
                     : 'bg-gradient-to-r from-purple-600 to-magenta-600 hover:from-magenta-600 hover:to-purple-600 hover:scale-[1.02] hover:shadow-2xl hover:shadow-purple-500/50'
                 }`}
               >
@@ -200,6 +284,11 @@ const ContactSection = () => {
                       <CheckCircle size={20} />
                       <span>Message Sent Successfully!</span>
                     </>
+                  ) : isLoading ? (
+                    <>
+                      <Loader2 size={20} className="animate-spin" />
+                      <span>Sending Message...</span>
+                    </>
                   ) : (
                     <>
                       <Send size={20} />
@@ -207,10 +296,13 @@ const ContactSection = () => {
                     </>
                   )}
                 </div>
-                {!isSubmitted && (
+                {!isSubmitted && !isLoading && (
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent transform -skew-x-12 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
                 )}
               </button>
+              {errors.submit && (
+                <div className="text-red-500 text-sm mt-2 text-center">{errors.submit}</div>
+              )}
             </form>
           </div>
         </div>

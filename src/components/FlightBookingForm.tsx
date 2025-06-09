@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Mail, Phone, MessageSquare, FileText, PlaneTakeoff, PlaneLanding, Calendar } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const validateEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 const validatePhone = (phone: string) => /^\d{10}$/.test(phone);
@@ -16,6 +17,7 @@ type FormDataType = {
 };
 
 const FlightBookingForm: React.FC = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState<FormDataType>({
     name: '',
     email: '',
@@ -27,6 +29,7 @@ const FlightBookingForm: React.FC = () => {
     message: ''
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState<Partial<FormDataType & { countryCode: string }>>({});
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -58,11 +61,75 @@ const FlightBookingForm: React.FC = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (validateForm()) {
-      setIsSubmitted(true);
-      setTimeout(() => setIsSubmitted(false), 3000);
+      setIsLoading(true);
+      try {
+        const requestData = {
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          departureDate: formData.departureDate,
+          destination: formData.destination,
+          origin: formData.origin,
+          message: formData.message
+        };
+
+        console.log('Sending flight booking request with data:', requestData);
+
+        const response = await fetch('https://backend-jay-pandya-0.onrender.com/api/tickets', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(requestData),
+          mode: 'cors'
+        });
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error('Error response body:', errorText);
+          throw new Error(`HTTP error! status: ${response.status}, body: ${errorText}`);
+        }
+
+        const data = await response.json();
+        console.log('Success response:', data);
+
+        setIsSubmitted(true);
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          countryCode: '+91',
+          departureDate: '',
+          destination: '',
+          origin: '',
+          message: ''
+        });
+
+        // Show success message for 5 seconds then redirect
+        setTimeout(() => {
+          setIsSubmitted(false);
+          navigate('/'); // Redirect to home page
+        }, 5000);
+
+      } catch (error) {
+        console.error('Flight booking form submission error:', error);
+        let errorMessage = 'Failed to send message. ';
+        if (error instanceof Error) {
+          errorMessage += error.message;
+        } else {
+          errorMessage += 'Please try again later.';
+        }
+        setErrors(prev => ({
+          ...prev,
+          submit: errorMessage
+        }));
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
