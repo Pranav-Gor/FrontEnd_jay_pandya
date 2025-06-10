@@ -13,7 +13,7 @@ const Footer = () => {
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row items-center justify-between">
           <div className="text-center md:text-left mb-6 md:mb-0">
-            <h3 className="text-2xl font-bold gradient-text mb-2">Jay Panday</h3>
+            <h3 className="text-2xl font-bold gradient-text mb-2">Jay Pandya</h3>
           </div>
 
           <div className="flex space-x-6 mb-6 md:mb-0">
@@ -41,7 +41,7 @@ const Footer = () => {
 
           <div className="text-center md:text-right">
             <p className="text-gray-400 text-sm">
-              © 2024 Jay Panday. All rights reserved.
+              © 2024 Jay Pandya. All rights reserved.
             </p>
           </div>
         </div>
