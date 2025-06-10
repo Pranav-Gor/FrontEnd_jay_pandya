@@ -46,7 +46,7 @@ const Navbar = () => {
               <Plane size={24} className="text-white" />
             </div>
             <div className="font-bold text-xl gradient-text cursor-pointer" onClick={() => scrollToSection('home')}>
-              Jay Panday
+              Jay Pandya
             </div>
           </div>
           
